@@ -479,7 +479,7 @@ ul.misionesLanzadas li {
 /* Modal lanzamiento */
 
 .modalMision,
-.modalSesion {
+.modalSesion, .modalConfirmacion{
     position: fixed;
     top: 0;
     left: 0;
@@ -570,6 +570,23 @@ ul.misionesLanzadas li {
     justify-content: center;
     font-size: 1.5rem;
     font-weight: bolder;
+}
+
+/* Modal Confirmación */
+
+.modalConfirmacion .modal {
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.modalConfirmacion .modal button:hover {
+    background: red;
+}
+
+.modalConfirmacion .modal button {
+    max-width: 40%;
+    margin: 0px 5px;
 }
 
 @media (max-width: 1280px) {

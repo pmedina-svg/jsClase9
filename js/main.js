@@ -45,9 +45,37 @@ verSesion.addEventListener("click", function(){
         modalSesion.style.display = "none";
     });
 
+    // const confirmacionCierre = new Promise((resolve, reject) => {
+    //     setTimeout(() =>{
+            
+    //     }, 10000);
+    // });
+
     const cerrarSesion = modalSesion.querySelector("a");
 
     cerrarSesion.addEventListener("click", function(){
+        modalConfirmacion.style.display = "flex";
+        // localStorage.clear();
+        // location.reload();
+    });
+
+    const modalConfirmacion = document.querySelector(".modalConfirmacion");
+    modalConfirmacion.innerHTML = `<div class="modal">
+                             <p>¿Estás seguro de que quieres cerrar sesión?</p>
+                             <div class="modal-opciones">
+                             <button class="confirmarCierre">Sí</button>
+                             <button class="cancelarCierre">Cancelar</button>
+                             </div>
+                             <p class="cierreAutomatico">Cancelación automatica en: s</p>
+                             </div>`;
+    //modalConfirmacion.style.display = "flex";
+
+    const cancelarCierre = modalConfirmacion.querySelector("button.cancelarCierre");
+    cancelarCierre.addEventListener("click", function(){
+        modalConfirmacion.style.display = "none";
+    });
+
+    confirmarCierre.addEventListener("click", function(){
         localStorage.clear();
         location.reload();
     });
