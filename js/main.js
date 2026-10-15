@@ -45,40 +45,70 @@ verSesion.addEventListener("click", function(){
         modalSesion.style.display = "none";
     });
 
-    // const confirmacionCierre = new Promise((resolve, reject) => {
-    //     setTimeout(() =>{
-            
-    //     }, 10000);
-    // });
-
+    
     const cerrarSesion = modalSesion.querySelector("a");
+    const modalConfirmacion = document.querySelector(".modalConfirmacion");
+    modalConfirmacion.innerHTML = `<div class="modal">
+    <p>¿Estás seguro de que quieres cerrar sesión?</p>
+    <div class="modal-opciones">
+    <button class="confirmarCierre">Sí</button>
+    <button class="cancelarCierre">Cancelar</button>
+    </div>
+    <p class="cierreAutomatico">Cancelación automatica en: <span>10</span>s</p>
+    </div>`;
+    
+    const cancelarCierre = modalConfirmacion.querySelector("button.cancelarCierre");
+    const confirmarCierre = modalConfirmacion.querySelector(".confirmarCierre");
+    
+    
+    /* Contador de cuenta regresiva usando tiempos setInterval y setTimeout */
 
     cerrarSesion.addEventListener("click", function(){
         modalConfirmacion.style.display = "flex";
-        // localStorage.clear();
-        // location.reload();
-    });
 
-    const modalConfirmacion = document.querySelector(".modalConfirmacion");
-    modalConfirmacion.innerHTML = `<div class="modal">
-                             <p>¿Estás seguro de que quieres cerrar sesión?</p>
-                             <div class="modal-opciones">
-                             <button class="confirmarCierre">Sí</button>
-                             <button class="cancelarCierre">Cancelar</button>
-                             </div>
-                             <p class="cierreAutomatico">Cancelación automatica en: s</p>
-                             </div>`;
-    //modalConfirmacion.style.display = "flex";
+        const confirmacionCierre = new Promise((resolve, reject) => {
+            
+            let tiempoCierre = 10;
+            const contador = modalConfirmacion.querySelector(".cierreAutomatico span");
 
-    const cancelarCierre = modalConfirmacion.querySelector("button.cancelarCierre");
-    cancelarCierre.addEventListener("click", function(){
-        modalConfirmacion.style.display = "none";
-    });
+            contador.textContent = tiempoCierre;
 
-    confirmarCierre.addEventListener("click", function(){
-        localStorage.clear();
-        location.reload();
+            const intervaloSegundos = setInterval(() => {
+                tiempoCierre--;
+                contador.textContent = tiempoCierre;
+            }, 1000);
+
+            const intervaloConfirmacion = setTimeout(() =>{
+                clearInterval(intervaloSegundos);
+                modalConfirmacion.style.display = "none";
+                resolve(false);
+            }, 10000);
+
+            function finalizarCierre(estadoConfirmacion){
+                clearTimeout(intervaloConfirmacion);
+                clearInterval(intervaloSegundos);
+                resolve(estadoConfirmacion);
+            }
+            
+            cancelarCierre.addEventListener("click", function(){
+                modalConfirmacion.style.display = "none";
+                finalizarCierre(false);
+            });
+
+            confirmarCierre.addEventListener("click", function(){
+                finalizarCierre(true);
+            });
+        });
+        
+        confirmacionCierre.then(data => {
+            if(data){
+                localStorage.clear();
+                location.reload();
+            }
+        });
+
     });
+    
     
 });
 
