@@ -9,15 +9,56 @@ inicioSession.addEventListener("submit", function(event){
     localStorage.setItem('Astronauta', nombreAstronauta);
     const nombreRegistrado = localStorage.getItem('Astronauta');
     nombreSesion.innerHTML = nombreRegistrado;
+    nombreUsuario.innerHTML = nombreRegistrado;
     registroSesion.style.display = "none";
+
+    mostrarBienvenida();
 });
 
+
 const nombreGuardado = localStorage.getItem("Astronauta");
+const nombreUsuario = document.querySelector("#nombreUsuario");
 
 if (nombreGuardado){
     nombreSesion.innerHTML = nombreGuardado;
+    nombreUsuario.innerHTML = nombreGuardado;
     registroSesion.style.display = "none";
+    mostrarBienvenida();
 }
+
+
+const modalBienvenida = document.querySelector(".modalBienvenida");
+const contenidoSimulador = document.querySelector("#contenidoSimulador");
+const iniciarSimulador = document.querySelector("#iniciarSimulador");
+
+function mostrarBienvenida(){
+    try{
+        const bienvenidaVista = localStorage.getItem("bienvenidaVista");
+        
+        if(!bienvenidaVista){
+            document.body.classList.add("mostrandoCarga");
+
+            setTimeout(function(){
+                modalBienvenida.style.display="flex";
+            }, 3000);
+        }
+    }
+    catch(e){
+        document.body.classList.remove("mostrandoCarga");
+        modalBienvenida.style.display="flex";
+    }
+    finally{
+        console.log("Lee las instrucciones");
+    }
+};
+
+iniciarSimulador.addEventListener("click", function(){
+    modalBienvenida.style.display="none";
+    contenidoSimulador.style.display = "block";
+    localStorage.setItem('bienvenidaVista', 'bienvenidaCheck');
+    localStorage.getItem('bienvenidaVista');
+});
+
 
 const verSesion = document.querySelector("#perfil");
 

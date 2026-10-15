@@ -132,6 +132,10 @@ h3 {
     font-weight: 100;
 }
 
+#contenidoSimulador {
+    display: none;
+}
+
 /*Header*/
 
 header {
@@ -496,6 +500,7 @@ ul.misionesLanzadas li {
 
 .modal {
     max-width: 320px;
+    width: 100%;
     padding: 20px;
     background: #010e19;
     border-radius: 10px;
@@ -598,6 +603,25 @@ ul.misionesLanzadas li {
     text-align: center;
 }
 
+/* Modal de bienvenida */
+
+.modalBienvenida .modal {
+    width: calc(100% - 40px);
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modalBienvenida .modal h2 {
+    color: #889fbd;
+    margin-bottom: 15px;
+}
+
+.modalBienvenida .modal button {
+    margin-top: 10px;
+}
+
+
 @media (max-width: 700px) {
     .carruselBienvenida {
         min-height: 300px;
@@ -683,5 +707,46 @@ ul.misionesLanzadas li {
 
     #listaDestinos {
         padding: 10px 0;
+    }
+}
+
+body.mostrandoCarga::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background-color: #080d1a;
+    background-image: url("../assets/logo-nasa.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 250px auto;
+    animation: animacionLogo 3s ease forwards;
+    pointer-events: none;
+}
+
+@keyframes animacionLogo {
+    0% {
+        opacity: 0;
+        background-size: 100px auto;
+        filter: brightness(0.5);
+    }
+
+    25% {
+        opacity: 1;
+        background-size: 250px auto;
+        filter: brightness(1.8) drop-shadow(0 0 15px #50c8ff);
+    }
+
+    70% {
+        opacity: 1;
+        background-size: 250px auto;
+        filter: brightness(1.2) drop-shadow(0 0 8px #50c8ff);
+    }
+
+    100% {
+        opacity: 0;
+        background-size: 280px auto;
+        filter: brightness(1);
+        visibility: hidden;
     }
 }
