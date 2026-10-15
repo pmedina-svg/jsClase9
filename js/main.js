@@ -59,7 +59,7 @@ verSesion.addEventListener("click", function(){
     
     const cancelarCierre = modalConfirmacion.querySelector("button.cancelarCierre");
     const confirmarCierre = modalConfirmacion.querySelector(".confirmarCierre");
-    
+
     
     /* Contador de cuenta regresiva usando tiempos setInterval y setTimeout */
 
@@ -243,9 +243,52 @@ function mostrarDestinos(destinos){
 
             const inputVelocidad = controles.querySelector("input");
             const botonLanzar = controles.querySelector("button");
+            const cuentaRegresivaModal = document.querySelector(".modalCuentaRegresiva");
 
-            botonLanzar.addEventListener("click", function(){               
+            cuentaRegresivaModal.innerHTML = `<div class="modal">
+                                           <p>Preparando lanzamiento...</p>
+                                           <img src="./assets/preparados.gif" alt="Preparando Lanzamiento" >
+                                           <p class="conteoAutomatico">Lanzamiento en: <span>5</span>s</p>
+                                           <div class="modal-opciones">
+                                           <button class="cancelarCierre">Cancelar lanzamiento</button>
+                                           </div>
+                                           </div>`;
 
+
+            botonLanzar.addEventListener("click", async function(){     
+                
+                cuentaRegresivaModal.style.display = "flex";
+
+                const lanzamientoConfirmado = await new Promise((resolve) => {
+                    
+                    let contadorSegundos = 5;
+                    
+                    const contador = cuentaRegresivaModal.querySelector(".conteoAutomatico span");
+                    const cancelarLanzamiento = cuentaRegresivaModal.querySelector(".cancelarCierre");
+                    
+                    contador.textContent = contadorSegundos;
+                    
+                    const intervaloSegundos = setInterval(() => {
+                        contadorSegundos--;
+                        contador.textContent = contadorSegundos;
+                    }, 1000);
+
+                    setTimeout(() =>{
+                        clearInterval(intervaloSegundos);
+                        cuentaRegresivaModal.style.display = "none";
+                        resolve(true);
+                    }, 5000);
+                    
+                    cancelarLanzamiento.addEventListener("click", () => {
+                        clearInterval(intervaloSegundos);
+                        cuentaRegresivaModal.style.display = "none";
+                        resolve(false);
+                    });
+                    
+                });
+                
+                if(!lanzamientoConfirmado) return;
+                
                 const nuevaMision = {
                     id: Date.now(),
                     destino: viaje.destino,

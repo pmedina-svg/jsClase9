@@ -479,7 +479,9 @@ ul.misionesLanzadas li {
 /* Modal lanzamiento */
 
 .modalMision,
-.modalSesion, .modalConfirmacion{
+.modalSesion, 
+.modalConfirmacion,
+.modalCuentaRegresiva{
     position: fixed;
     top: 0;
     left: 0;
@@ -580,13 +582,19 @@ ul.misionesLanzadas li {
     text-align: center;
 }
 
-.modalConfirmacion .modal button:hover {
+.modalConfirmacion .modal button:hover, .modalCuentaRegresiva .modal button:hover{
     background: red;
 }
 
 .modalConfirmacion .modal button {
     max-width: 40%;
     margin: 0px 5px;
+}
+
+/* Modal Cuesta Regresiva */
+
+.modalCuentaRegresiva {
+    text-align: center;
 }
 
 @media (max-width: 1280px) {
