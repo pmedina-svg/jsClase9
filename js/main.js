@@ -51,7 +51,7 @@ function mostrarBienvenida(){
         
     }
     finally{
-        console.log("Lee las instrucciones");
+        console.log("Bienvenida Finalizada");
     }
 };
 
@@ -281,6 +281,7 @@ function mostrarDestinos(destinos){
 
             controles.innerHTML = `<p>Velocidad de la nave (km/h)</p>
                                     <input type="number" value="${viaje.velocidad}">
+                                    <span class="error"></span>
                                     <div class="opcionesBotones">
                                     <button>🚀 Lanzar misión</button>
                                     </div>`
@@ -288,6 +289,22 @@ function mostrarDestinos(destinos){
             const inputVelocidad = controles.querySelector("input");
             const botonLanzar = controles.querySelector("button");
             const cuentaRegresivaModal = document.querySelector(".modalCuentaRegresiva");
+
+            function validarVelocidad(){
+                
+                const nuevaVelocidad = parseInt(inputVelocidad.value);
+                const mensajeError = controles.querySelector(".error");
+    
+                if (inputVelocidad.value === "" || isNaN(nuevaVelocidad) || nuevaVelocidad <= 0){
+                    mensajeError.textContent = "ingresa una velocidad mayor a 0";
+                    return false;
+                }
+    
+                mensajeError.textContent = "";
+                viaje.velocidad = nuevaVelocidad;
+                return true;
+
+            }
 
             cuentaRegresivaModal.innerHTML = `<div class="modal">
                                            <p>Preparando lanzamiento...</p>
@@ -299,7 +316,11 @@ function mostrarDestinos(destinos){
                                            </div>`;
 
 
-            botonLanzar.addEventListener("click", async function(){     
+            botonLanzar.addEventListener("click", async function(){
+
+                if (!validarVelocidad()){
+                    return;
+                }
                 
                 cuentaRegresivaModal.style.display = "flex";
 
@@ -317,13 +338,14 @@ function mostrarDestinos(destinos){
                         contador.textContent = contadorSegundos;
                     }, 1000);
 
-                    setTimeout(() =>{
+                    const tiempoLanzamiento = setTimeout(() =>{
                         clearInterval(intervaloSegundos);
                         cuentaRegresivaModal.style.display = "none";
                         resolve(true);
                     }, 5000);
                     
                     cancelarLanzamiento.addEventListener("click", () => {
+                        clearTimeout(tiempoLanzamiento);
                         clearInterval(intervaloSegundos);
                         cuentaRegresivaModal.style.display = "none";
                         resolve(false);
@@ -370,7 +392,9 @@ function mostrarDestinos(destinos){
 
             inputVelocidad.addEventListener("keyup", function(){
 
-                viaje.velocidad = parseInt(inputVelocidad.value);
+                if (!validarVelocidad()){
+                    return;
+                }
 
                 const duracion = configuracion.querySelector(".duracion");
                 const velocidad = configuracion.querySelector(".velocidad");

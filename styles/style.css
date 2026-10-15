@@ -403,6 +403,14 @@ main h3:after {
     width: 100%;
 }
 
+.controlVelocidad span.error {
+    display: block;
+    color: #e74c3c;
+    font-style: italic;
+    font-size: 12px;
+    margin-top: 9px;
+}
+
 /* Quita las flechas en Chrome, Safari, Edge y Opera */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
