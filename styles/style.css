@@ -597,6 +597,146 @@ ul.misionesLanzadas li {
     text-align: center;
 }
 
+/* Modal Bienvenida*/
+
+.modalBienvenida {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #010e19e6;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.carouselBienvenida {
+    width: 100%;
+    max-width: 650px;
+    min-height: 400px;
+    padding: 30px;
+    box-sizing: border-box;
+    background: #010e19;
+    border: 1px solid #224159;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+/* Slides */
+
+.slide {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0 30px;
+}
+
+.slide.activo {
+    display: flex;
+}
+
+.slide h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    color: #889fbd;
+}
+
+.slide p {
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+    color: #fff;
+    max-width: 480px;
+}
+
+.slide img {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    max-height: 180px;
+    object-fit: contain;
+    margin: 10px auto 20px;
+}
+
+/* Controles */
+
+.controlesCarrusel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.controlesCarrusel button {
+    background: #003474;
+    border: 1px solid #224159;
+    border-radius: 10px;
+    color: #fff;
+    padding: 12px 20px;
+    font-family: "Google Sans", sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.controlesCarrusel button:hover:not(:disabled) {
+    background: #0b335b;
+}
+
+.controlesCarrusel button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+
+@media (max-width: 700px) {
+    .carruselBienvenida {
+        min-height: 300px;
+        padding: 20px;
+    }
+
+    .slideBienvenida h2 {
+        font-size: 2rem;
+    }
+
+    .slideBienvenida p {
+        font-size: 1.3rem;
+    }
+
+    .carouselBienvenida {
+        min-height: 360px;
+        padding: 20px;
+    }
+
+    .slide h2 {
+        font-size: 2rem;
+    }
+
+    .slide p {
+        font-size: 1.3rem;
+        line-height: 2rem;
+    }
+
+    .slide img {
+        max-width: 240px;
+        max-height: 140px;
+    }
+
+    .controlesCarrusel button {
+        padding: 10px 16px;
+    }
+}
+
+
 @media (max-width: 1280px) {
     body {
         padding: 20px;
