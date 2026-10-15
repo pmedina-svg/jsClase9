@@ -2,6 +2,10 @@ const registroSesion = document.querySelector("#intro");
 const astronauta = document.querySelector("#intro input");
 const inicioSession = document.querySelector("#intro form");
 const nombreSesion = document.querySelector(".datos-perfil span")
+const modalBienvenida = document.querySelector(".modalBienvenida");
+const contenidoSimulador = document.querySelector("#contenidoSimulador");
+const iniciarSimulador = document.querySelector("#iniciarSimulador");
+
 
 inicioSession.addEventListener("submit", function(event){
     event.preventDefault();
@@ -26,11 +30,6 @@ if (nombreGuardado){
     mostrarBienvenida();
 }
 
-
-const modalBienvenida = document.querySelector(".modalBienvenida");
-const contenidoSimulador = document.querySelector("#contenidoSimulador");
-const iniciarSimulador = document.querySelector("#iniciarSimulador");
-
 function mostrarBienvenida(){
     try{
         const bienvenidaVista = localStorage.getItem("bienvenidaVista");
@@ -42,10 +41,14 @@ function mostrarBienvenida(){
                 modalBienvenida.style.display="flex";
             }, 3000);
         }
+        else{
+            contenidoSimulador.style.display = "block";
+        }
     }
     catch(e){
+        console.error("Error capturado por catch:", e);
         document.body.classList.remove("mostrandoCarga");
-        modalBienvenida.style.display="flex";
+        
     }
     finally{
         console.log("Lee las instrucciones");
