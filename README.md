@@ -16,3 +16,16 @@ El proyecto debe mantener el contexto actual y las herramientas ser una adición
 
 Entrega:
 Sube tus archivos a un repositorio de GitHub y comparte la URL. Asegúrate de que el repositorio sea público para que pueda ser revisado.
+
+----------------------------------------------
+
+Observaciones:
+
+Temporizador:
+Agregué temporizador en varias instancias: 
+1. Al añadir un nombre de astronauta usé setTimeout entre el mensaje de bienvenida y el simulador.
+2. Al cerrar sesión usé setInterval para mostrar un conteo en regresivo en pantalla y setTimeout para confirmar el cierre de sesión con cancelación automatica en caso de tiempo cumplido.
+3. Al lanzar misión usé setTimeout con un plazo de 5 segundos para cancelar el lanzamiento de la misión (por si quieren modificar algo o simplemente cancelar).
+
+Manejo de errores:
+Lo agregué de manera casi simbolica (porque era opcional) usando el try, catch y finally en el mensaje de bienvenida antes de iniciar el simulador.
